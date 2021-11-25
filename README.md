@@ -20,7 +20,7 @@
 # Usage
 1. In ```PySpark/script/runSpark.sh``` set ```MY_PTH="your/path/to/PySpark-CarPricePrediction/PySpark" ``` 
 2. Execute ```sh runProject.sh```   
-
+3. Open ```Client/home.html``` and get car price
 
 
 
