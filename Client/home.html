@@ -10,13 +10,12 @@
 <body class="text-center">
     <main class="form-signin">
         <form id="frm1">
-            <img class="mb-4" src="css/autoImg.png" alt=""
-                width="130" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Calcola il prezzo della tua auto</h1>
+            <img class="mb-4" src="css/autoImg.png" alt="" width="130" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Find out the price of your car</h1>
             <div class="form-floating">
                 <label class="sr-only"></label>
                 <select required id="InputBrand" type="text" class='form-control'>
-                    <option value="" selected disabled>Marca</option>
+                    <option value="" selected disabled>Brand</option>
                     <option value="merc">merc</option>
                     <option value="ford">ford</option>
                     <option value="vw">vw</option>
@@ -29,9 +28,9 @@
                 </select>
             </div>
             <div class="form-floating">
-                <label class="sr-only">Tipo combustione</label>
+                <label class="sr-only">Fuel type</label>
                 <select id="InputFuel" type="text" class="form-control">
-                    <option value="" selected disabled>Carburante</option>
+                    <option value="" selected disabled>Fuel type</option>
                     <option value="Diesel">Diesel</option>
                     <option value="Petrol">Petrol</option>
                     <option value="Hybrid">Hybrid</option>
@@ -41,9 +40,9 @@
             </div>
 
             <div class="form-floating">
-                <label class="sr-only">Modello</label>
+                <label class="sr-only">Model</label>
                 <select id="InputModel" type="text" class="form-control">
-                    <option value="" selected disabled>Modello</option>
+                    <option value="" selected disabled>Model</option>
                     <option value=" Arteon"> Arteon</option>
                     <option value=" Grand C-MAX"> Grand C-MAX</option>
                     <option value=" Santa Fe"> Santa Fe</option>
@@ -63,9 +62,9 @@
                 </select>
             </div>
             <div class="form-floating">
-                <label class="sr-only">Cambio dell'auto</label>
+                <label class="sr-only">Transmission</label>
                 <select id="InputTransmission" type="text" class="form-control">
-                    <option value="" selected disabled>Cambio</option>
+                    <option value="" selected disabled>Transmission</option>
                     <option value="Manual">Manual</option>
                     <option value="Automatic">Automatic</option>
                     <option value="Semi-Auto">Semi-Auto</option>
@@ -73,44 +72,37 @@
                 </select>
             </div>
             <div class="form-floating">
-
-                <input id="InputYear" placeholder="Inserisci l'anno di produzione dell'auto" type="number"
-                    class="form-control"></input>
-                <label class="sr-only">Anno di produzione</label>
+                <input id="InputYear" placeholder="Insert year" type="number" class="form-control"></input>
+                <label class="sr-only">Year</label>
             </div>
             <div class="form-floating">
-                <input id="InputMileage" placeholder="Inserisci le miglia percorse dall'auto" type="number"
-                    class="form-control"></input>
-                <label class="sr-only">Miglia</label>
+                <input id="InputMileage" placeholder="Insert mileage" type="number" class="form-control"></input>
+                <label class="sr-only">Mileage</label>
             </div>
             <div class="form-floating">
 
-                <input id="InputTax" placeholder="Inserisci le tasse dell'auto" type="number"
-                    class="form-control"></input>
-                <label class="sr-only">Tasse</label>
+                <input id="InputTax" placeholder="Insert road tax" type="number" class="form-control"></input>
+                <label class="sr-only">Road tax</label>
             </div>
             <div class="form-floating">
-                <input id="InputMpg" placeholder="Inserisci il consumo in miglia per gallone" type="number"
-                    class="form-control">
-                <label for="InputMpg">Consumo</label>
+                <input id="InputMpg" placeholder="Insert MPG" type="number" class="form-control">
+                <label for="InputMpg">MPG</label>
 
             </div>
             <div class="form-floating">
 
-                <input id="InputEngineSize" placeholder="Inserisci la cilindrata dell'auto es: 2.0" type="number"
-                    class="form-control"></input>
-                <label for="InputEngineSize">Cilindrata</label>
+                <input id="InputEngineSize" placeholder="Insert engine size" type="number" class="form-control"></input>
+                <label for="InputEngineSize">Engine size</label>
             </div>
             <div class="dark">
 
-                <input id="inputButton" type="button" class="btn btn-lg btn-primary btn-block" onclick="myFunction()"
-                    value="Calcola prezzo">
+                <input id="inputButton" type="button" class="btn btn-lg btn-primary btn-block" onclick="getPrice()"
+                    value="Get price">
             </div>
 
             <div class="form-floating">
                 <p id="InputPrice" type="number" class="form-control" readonly></p>
             </div>
-
         </form>
     </main>
 </body>
@@ -118,7 +110,7 @@
 
 <script>
 
-    function myFunction() {
+    function getPrice() {
         jsonObj = buildJson()
         console.log(jsonObj)
         postJson(jsonObj)
@@ -137,7 +129,7 @@
             engineSize: parseFloat(x.elements[8].value)
         }
         let postData = {
-            id: "modello",
+            id: "car",
             arguments: data
         }
         return postData
@@ -145,7 +137,7 @@
 
     function postJson(jsonObj) {
         xhr = new XMLHttpRequest();
-        var url = "http://localhost:8080/openscoring/model/modello";
+        var url = "http://localhost:8080/openscoring/model/linreg";
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.setRequestHeader('Accept', 'application/json');
@@ -153,7 +145,7 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var json = JSON.parse(xhr.responseText);
-                document.getElementById("InputPrice").innerHTML = "$" + parseInt(json.results.price);
+                document.getElementById("InputPrice").innerHTML = "£" + parseInt(json.results.price);
             }
         }
         var data = JSON.stringify(jsonObj);
