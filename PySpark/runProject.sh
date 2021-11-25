@@ -11,7 +11,7 @@ sh script/runSpark.sh
 
 #RENAME XML TO PMML
 cd output
-mv part-00001 modello.xml
+mv part-00001 linreg.xml
 mmv -v '*.xml' '#1.pmml'
 cd ..
 
@@ -20,7 +20,7 @@ java -jar script/openscoring-server-executable-2.0.5.jar &
 
 #UPLOAD MODEL TO OPENSCORING
 sleep 5
-curl -X PUT --data-binary @output/modello.pmml -H "Content-type: text/xml" http://localhost:8080/openscoring/model/modello
+curl -X PUT --data-binary @output/linreg.pmml -H "Content-type: text/xml" http://localhost:8080/openscoring/model/linreg
 
 #DISABLE CHROME SECURITY
 google-chrome --disable-web-security --user-data-dir=[opt/google/chrome]
