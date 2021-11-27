@@ -7,10 +7,13 @@
   - normalizes numerical features using a MinMaxScaler
   - builds a one-hot-vector for categorical features
   - trains a Linear Regression model
+  <img src="README_img/pipeline.png"  width="80%" height="80%">
 - The model achieved an R2 score of: ~0.87
 - The model is exported in .pmml using [pyspark2pmml library](https://github.com/jpmml/pyspark2pmml) 
 - Launch [openscoring](https://github.com/openscoring/openscoring) server and upload the pmml model to it
-- Developed a client interface (using HTML+Javascript+Bootstrap) to get predictions   
+- Developed a client interface (using HTML+Javascript+Bootstrap) to get predictions
+<img src="README_img/dataflow.png"  width="80%" height="80%">
+   
 # Prerequisites 
 - Apache Hadoop (2.10.0)
 - Apache Spark (3.0.1)
